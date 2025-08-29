@@ -1,0 +1,132 @@
+/* Base */
+:root {
+  --bg: #f6f7fb;
+  --text: #1f2430;
+  --muted: #707a94;
+  --card: #ffffff;
+  --primary: #0ea5e9;
+  --border: #e6e8ee;
+
+  --bg-dark: #0f1218;
+  --text-dark: #e6eaf2;
+  --muted-dark: #a8b0c3;
+  --card-dark: #151a23;
+  --border-dark: #232a36;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Theming */
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* Nav / Hero */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(8px);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+body.dark .nav { background: color-mix(in srgb, var(--bg-dark) 85%, transparent); border-color: var(--border-dark); }
+
+.brand { font-weight: 800; letter-spacing: .3px; }
+.brand span { color: var(--primary); }
+
+.nav-links a {
+  margin-left: 18px; text-decoration: none; color: inherit; font-weight: 600;
+  opacity: .8;
+}
+.nav-links a:hover { opacity: 1; }
+
+.hero {
+  padding: 64px 0 40px;
+  background: radial-gradient(1200px 400px at 50% -10%, rgba(14,165,233,.15), transparent);
+}
+body.dark .hero { background: radial-gradient(1200px 400px at 50% -10%, rgba(14,165,233,.25), transparent); }
+
+.hero-content h1 {
+  font-size: clamp(28px, 6vw, 48px);
+  margin: 0 0 8px;
+}
+.subtitle { max-width: 800px; opacity: .85; }
+.cta { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  padding: 10px 16px; border-radius: 10px; text-decoration: none; display: inline-block;
+  border: 2px solid var(--primary); color: var(--primary); font-weight: 700;
+}
+.btn.primary { background: var(--primary); color: white; border-color: var(--primary); }
+.btn.ghost:hover { background: color-mix(in srgb, var(--primary) 8%, transparent); }
+
+/* Sections */
+.section { margin-top: 48px; }
+.section h2 {
+  font-size: 24px; margin: 0 0 12px; padding-bottom: 8px;
+  border-bottom: 2px solid color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+/* Grids & Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+body.dark .card { background: var(--card-dark); border-color: var(--border-dark); box-shadow: 0 1px 0 rgba(0,0,0,0.2); }
+.card:hover { transform: translateY(-3px); }
+
+.card img { width: 32px; height: 32px; object-fit: contain; }
+
+ul.bullets { margin: 8px 0 0 18px; }
+
+.projects .project { flex-direction: column; align-items: flex-start; }
+.projects .project h4 { margin: 0 0 6px; }
+.projects .project a { color: var(--primary); text-decoration: none; font-weight: 700; }
+
+/* Contact */
+.contact { list-style: none; padding: 0; margin: 10px 0 0; }
+.contact li { margin-bottom: 6px; }
+.contact a { color: var(--primary); text-decoration: none; }
+
+/* Toggle button */
+.toggle-btn {
+  position: fixed; right: 18px; bottom: 18px; z-index: 60;
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--card);
+  display: grid; place-items: center; font-size: 18px; cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,.12);
+}
+body.dark .toggle-btn { background: var(--card-dark); border-color: var(--border-dark); }
+
+.footer { margin-top: 56px; padding: 24px 0; border-top: 1px solid var(--border); text-align: center; opacity: .8; }
+body.dark .footer { border-color: var(--border-dark); }
+
+/* Small screens */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+}
