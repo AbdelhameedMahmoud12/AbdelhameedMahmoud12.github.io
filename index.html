@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Personal Portfolio - Pawan Kumavat</title>
+    <title>Personal Projects - Abdelhameed Mahmoud</title>
 
     <!-- bootstrap css cdn link  -->
     <link
@@ -35,8 +35,6 @@
     AOS Library css file cdn link -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <!-- jquery cdn link  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
   <body>
     <!-- navbar starts -->
@@ -45,9 +43,10 @@
       class="navbar navbar-expand-lg navbar-light bg-white sticky-top"
     >
       <div class="container-fluid px-5">
-        <a class="navbar-brand fw-bold fs-2" href="#" style="color: #3f396d"
-          >Portfolio</a
-        >
+        <a class="navbar-brand fw-bold fs-2" href="#" style="color: #3f396d">
+          <img src="images/Profile.png" alt="Profile Picture" style="height: 40px; border-radius: 50%; margin-right: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profilePictureModal">
+          Electronic Engineer
+        </a>
         <button
           class="nav-menu d-md-none"
           type="button"
@@ -71,40 +70,48 @@
               <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#portfolio">Portfolio</a>
+              <a class="nav-link" href="#projects">Projects</a>
             </li>
+            <!--
             <li class="nav-item">
               <a class="nav-link" href="#testimonial">Testimonials</a>
             </li>
+            -->
             <li class="nav-item">
               <a class="nav-link" href="#blog">Blog</a>
             </li>
           </ul>
         </div>
-        <button class="c-btn ms-4 py-2 px-4 rounded-pill d-none d-md-block">Contact</button>
+		<button 
+		  class="c-btn ms-4 py-2 px-4 rounded-pill d-none d-md-block"
+		  onclick="window.location.href='#contact'">
+		  Contact
+		</button>
       </div>
     </nav>
     <!-- navbar ends here -->
-
     <!-- home section starts  -->
     <section class="home pt-5 pb-5" id="home">
       <div class="row justify-content-evenly align-middle">
         <!-- here data-aos is used for adding aos animation  -->
-        <div class="col-10 col-md-6 text-center text-md-start" data-aos="slide-right">
-          <h2 style="color: #3f396d">
-            Hello! I Am <br /><span class="c-orange">Pawan Kumavat</span>
+        <div class="col-10 col-md-12 text-center" data-aos="fade-in">
+          <h2 style="color: #fff">
+            Hello! I Am <br /><span class="c-orange">Abdelhameed Mahmoud</span>
           </h2>
-          <p class="text-muted">
-            I'm A Web Developer having 5 years of experience in expertise of
-            creating website with fully responsive Also with backend part too.
+          <p class="text-white">
+			I’m an Electronics Engineer with hands-on experience in digital IC design, 
+			FPGA prototyping, and ASIC flow.
+			 Skilled in creating efficient and reliable hardware systems,
+			 from RTL design and verification to physical implementation,
+			 while also working with embedded systems and programming.
           </p>
-          <button class="c-btn h-btn mt-3 py-3 px-5 rounded-pill">
-            Hire Me
-          </button>
+<button 
+  class="c-btn h-btn mt-3 py-3 px-5 rounded-pill"
+  onclick="window.open('https://www.linkedin.com/in/abdelhameed-mahmoud-25097623b/', '_blank')">
+
+  Hire Me
+</button>
           <a href="" class="link ms-4 d-none">See My Work</a>
-        </div>
-        <div class="col-10 col-md-4 d-none d-md-block">
-          <img src="images/banner-01.webp" class="img-fluid" alt="" />
         </div>
       </div>
     </section>
@@ -116,7 +123,7 @@
         <small>My Expertise</small>
         <h3>
           Provide Wide Range of <br />
-          Digital Services
+          Electronics & Communication Services
         </h3>
       </div>
       <div class="row justify-content-evenly mt-5">
@@ -130,12 +137,10 @@
               />
             </div>
             <div class="content mt-3">
-              <h4>Web Design</h4>
+              <h4>Digital IC Design</h4>
               <p class="text-muted">
-                Dolor repellendus temporibus autem quibusdam officiis debitis
-                rerum neces aibus minima veniam.
+                Specialized in RTL-to-GDSII flow, creating efficient and reliable integrated circuits from design to physical implementation.
               </p>
-              <a href="" class="link">Read More</a>
             </div>
           </div>
         </div>
@@ -149,12 +154,10 @@
               />
             </div>
             <div class="content mt-3">
-              <h4>Web Development</h4>
+              <h4>FPGA Prototyping</h4>
               <p class="text-muted">
-                Dolor repellendus temporibus autem quibusdam officiis debitis
-                rerum neces aibus minima veniam.
+                Experienced in FPGA prototyping for hardware acceleration and system validation, ensuring functionality and performance.
               </p>
-              <a href="" class="link">Read More</a>
             </div>
           </div>
         </div>
@@ -168,12 +171,10 @@
               />
             </div>
             <div class="content mt-3">
-              <h4>Debugging</h4>
+              <h4>Embedded Systems</h4>
               <p class="text-muted">
-                Dolor repellendus temporibus autem quibusdam officiis debitis
-                rerum neces aibus minima veniam.
+                Skilled in developing and programming embedded systems for various applications, from microcontrollers to complex hardware.
               </p>
-              <a href="" class="link">Read More</a>
             </div>
           </div>
         </div>
@@ -183,108 +184,112 @@
 
     <!-- skill section starts -->
     <section class="skill mt-5 py-5" id="about">
-      <div class="row justify-content-evenly">
-        <div class="col-10 col-md-5 skill-with-progress" data-aos="slide-right">
-          <div class="row justify-content-evenly">
-            <div class="col-10 col-md-6">
-              <div class="progress-card ms-3 ms-md-0">
-                <div class="circular-progress html-css">
-                  <span class="progress-value html-progress">0%</span>
-                </div>
-                <br />
-                <span class="text">HTML & CSS</span>
-              </div>
-            </div>
-            <div class="col-10 col-md-6 mt-4 mt-md-0">
-              <div class="progress-card ms-3 ms-md-0">
-                <div class="circular-progress javascript">
-                  <span class="progress-value javascript-progress">0%</span>
-                </div>
-                <br />
-                <span class="text">JavaScript</span>
-              </div>
+      <div class="container">
+        <div class="heading text-center">
+          <small>My Skills</small>
+          <h3>Technical Proficiencies for Hardware Engineering</h3>
+        </div>
+        <div class="row mt-5" data-aos="fade-up">
+          <div class="col-md-3">
+            <div class="skill-category">
+              <h4>Languages & Scripting</h4>
+              <ul class="list-unstyled">
+                <li class="skill-sub-heading">Hardware Languages</li>
+                <li><i class="bi bi-chevron-right"></i> Verilog</li>
+                <li><i class="bi bi-chevron-right"></i> SystemVerilog</li>
+                <li><i class="bi bi-chevron-right"></i> VHDL</li>
+                <li class="skill-sub-heading mt-3">Programming & Scripting</li>
+                <li><i class="bi bi-chevron-right"></i> C/C++</li>
+                <li><i class="bi bi-chevron-right"></i> Python</li>
+                <li><i class="bi bi-chevron-right"></i> Tcl</li>
+              </ul>
             </div>
           </div>
-          <div class="row justify-content-evenly mt-4">
-            <div class="col-10 col-md-6">
-              <div class="progress-card ms-3 ms-md-0">
-                <div class="circular-progress php">
-                  <span class="progress-value php-progress">0%</span>
-                </div>
-                <br />
-                <span class="text">PHP</span>
-              </div>
+          <div class="col-md-3">
+            <div class="skill-category">
+              <h4>Methodologies & FPGA Tools</h4>
+              <ul class="list-unstyled">
+                <li class="skill-sub-heading">Methodologies</li>
+                <li><i class="bi bi-chevron-right"></i> ASIC/VLSI Flow (RTL-to-GDSII)</li>
+                <li><i class="bi bi-chevron-right"></i> FPGA Prototyping</li>
+                <li class="skill-sub-heading mt-3">FPGA Design</li>
+                <li><i class="bi bi-chevron-right"></i> Xilinx Vivado</li>
+                <li><i class="bi bi-chevron-right"></i> Quartus Prime</li>
+              </ul>
             </div>
-            <div class="col-10 col-md-6 mt-4 mt-md-0">
-              <div class="progress-card ms-3  ms-md-0">
-                <div class="circular-progress reactjs">
-                  <span class="progress-value reactjs-progress">0%</span>
-                </div>
-                <br>
-                <span class="text">ReactJS</span>
-              </div>
+          </div>
+          <div class="col-md-3">
+            <div class="skill-category">
+              <h4>ASIC & Verification Tools</h4>
+              <ul class="list-unstyled">
+                <li class="skill-sub-heading">ASIC Design</li>
+                <li><i class="bi bi-chevron-right"></i> Cadence Tools</li>
+                <li><i class="bi bi-chevron-right"></i> Synopsys Tools</li>
+                <li class="skill-sub-heading mt-3">Verification</li>
+                <li><i class="bi bi-chevron-right"></i> QuestaSim</li>
+                <li><i class="bi bi-chevron-right"></i> ModelSim</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="skill-category">
+              <h4>Simulation & Analysis</h4>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-chevron-right"></i> MATLAB</li>
+                <li><i class="bi bi-chevron-right"></i> Simulink</li>
+                <li><i class="bi bi-chevron-right"></i> LabView</li>
+                <li><i class="bi bi-chevron-right"></i> Multisim</li>
+                <li><i class="bi bi-chevron-right"></i> Proteus</li>
+                <li><i class="bi bi-chevron-right"></i> Ansys HFSS</li>
+              </ul>
             </div>
           </div>
         </div>
-        <div class="col-10 col-md-5 skill-detail" data-aos="slide-left">
-          <div class="heading mt-5 mt-md-3">
-            <small>My Skills</small>
-            <h3>Beautiful & Unique Digital Experiences</h3>
+        <div class="row justify-content-center mt-4" data-aos="fade-up">
+          <div class="col-md-8 text-center">
             <p class="text-muted">
-              Nostrum exercitationem ullam corporis suscipit laborioa nisi ut
-              aliquid exrea commodi consequatur magni dolores aos qui ratione
-              voluptatem nesciunt.
+              Proficient in hardware description languages, programming, and simulation tools essential for modern electronics design and verification.
+              Bringing a strong foundation in digital logic and system design to solve complex engineering challenges.
             </p>
-            <p class="text-muted">
-              Quia voluptas sit aspernatur aut odit aut fugit, sed ruiano
-              consequntar magni dolores.
-            </p>
-            <button class="c-btn h-btn mt-3 py-3 px-5 rounded-pill">
-              <!-- here download attribute is used for adding download functionality to button  -->
-              <a
-                href="Entry Level Web Developer Resume.pdf"
-                download="SampleCV"
-                style="text-decoration: none;color: #fff;"
-                >Download CV</a
-              >
-            </button>
+            <a href="resume.html" target="_blank" class="c-btn h-btn mt-3 py-3 px-5 rounded-pill text-white text-decoration-none">
+              View CV
+            </a>
           </div>
         </div>
       </div>
     </section>
     <!-- skill section end here -->
 
-    <!-- portfolio section starts here -->
-    <section class="portfolio" id="portfolio">
+    <!-- projects section starts here -->
+    <section class="projects" id="projects">
       <div class="heading text-center pt-5">
         <small>Creative Work</small>
-        <h3>Check My Portfolio</h3>
+        <h3>Check My Projects</h3>
       </div>
 
       <div id="myBtnContainer" class="text-center mt-4">
         <!-- here we will create custom attribute using data- for filtering -->
         <button class="filter-item" data-filter="all">All</button>
-        <button class="filter-item" data-filter="game">Game</button>
-        <button class="filter-item" data-filter="webapp">Web App</button>
-        <button class="filter-item" data-filter="website">Website</button>
-        <button class="filter-item" data-filter="brand">Brand</button>
+        <button class="filter-item" data-filter="ic-design">IC Design</button>
+        <button class="filter-item" data-filter="fpga">FPGA</button>
+        <button class="filter-item" data-filter="embedded">Embedded</button>
       </div>
-      <div class="portfolio-body">
+      <div class="projects-body">
         <div class="row justify-content-evenly px-4">
-          <div class="post col-md-4 game all col-10 mt-3 mt-md-0" data-aos="fade-up">
+          <div class="post col-md-4 ic-design all col-10 mt-3 mt-md-0" data-aos="fade-up">
             <div class="card">
               <img src="images/2048game.png" class="card-img-top" alt="..." />
               <div class="card-body text-center">
-                <h4 class="card-title">2048 Game</h4>
-                <span class="badge bg-secondary badge-pill">HTML&CSS</span>
-                <span class="badge bg-secondary badge-pill">JavaScript</span>
-                <span class="badge bg-secondary badge-pill mb-2">Game</span
+                <h4 class="card-title">RISC-V CPU Design</h4>
+                <span class="badge bg-secondary badge-pill">RTL</span>
+                <span class="badge bg-secondary badge-pill">Verification</span>
+                <span class="badge bg-secondary badge-pill mb-2">IC Design</span
                 ><br />
-                <a href="#" class="link">Read More</a>
+                <a href="project-riscv.html" target="_blank" class="link">Read More</a>
               </div>
             </div>
           </div>
-          <div class="post col-md-4 website all col-10 mt-3 mt-md-0" data-aos="fade-up">
+          <div class="post col-md-4 fpga all col-10 mt-3 mt-md-0" data-aos="fade-up">
             <div class="card">
               <img
                 src="images/currency-converter.png"
@@ -292,57 +297,57 @@
                 alt="..."
               />
               <div class="card-body text-center">
-                <h4 class="card-title">Converter App</h4>
-                <span class="badge bg-secondary badge-pill">HTML&CSS</span>
-                <span class="badge bg-secondary badge-pill">JavaScript</span>
-                <span class="badge bg-secondary badge-pill mb-2">Website</span
+                <h4 class="card-title">FPGA Image Processing</h4>
+                <span class="badge bg-secondary badge-pill">VHDL</span>
+                <span class="badge bg-secondary badge-pill">Xilinx Vivado</span>
+                <span class="badge bg-secondary badge-pill mb-2">FPGA</span
                 ><br />
-                <a href="#" class="read-more-btn link">Read More</a>
+                <a href="project-fpga.html" target="_blank" class="read-more-btn link">Read More</a>
               </div>
             </div>
           </div>
-          <div class="post col-md-4 webapp all col-10 mt-3 mt-md-0" data-aos="fade-up">
+          <div class="post col-md-4 embedded all col-10 mt-3 mt-md-0" data-aos="fade-up">
             <div class="card">
               <img src="images/dictionary.png" class="card-img-top" alt="..." />
               <div class="card-body text-center">
-                <h4 class="card-title">Dictionary</h4>
-                <span class="badge bg-secondary badge-pill">HTML&CSS</span>
-                <span class="badge bg-secondary badge-pill">JavaScript</span>
-                <span class="badge bg-secondary badge-pill mb-2">WebApp</span
+                <h4 class="card-title">IoT Weather Station</h4>
+                <span class="badge bg-secondary badge-pill">C++</span>
+                <span class="badge bg-secondary badge-pill">ESP32</span>
+                <span class="badge bg-secondary badge-pill mb-2">Embedded</span
                 ><br />
-                <a href="#" class="read-more-btn link">Read More</a>
+                <a href="project-iot.html" target="_blank" class="read-more-btn link">Read More</a>
               </div>
             </div>
           </div>
         </div>
         <div class="row justify-content-evenly mt-4 px-4">
-          <div class="post col-md-4 game all col-10 mt-3 mt-md-0" data-aos="fade-up">
+          <div class="post col-md-4 ic-design all col-10 mt-3 mt-md-0" data-aos="fade-up">
             <div class="card">
               <img src="images/piceditor.png" class="card-img-top" alt="..." />
               <div class="card-body text-center">
-                <h4 class="card-title">PicEditor App</h4>
-                <span class="badge bg-secondary badge-pill">HTML&CSS</span>
-                <span class="badge bg-secondary badge-pill">JavaScript</span>
-                <span class="badge bg-secondary badge-pill mb-2">App</span
+                <h4 class="card-title">Custom ASIC Accelerator</h4>
+                <span class="badge bg-secondary badge-pill">SystemVerilog</span>
+                <span class="badge bg-secondary badge-pill">ASIC Flow</span>
+                <span class="badge bg-secondary badge-pill mb-2">IC Design</span
                 ><br />
-                <a href="#" class="read-more-btn link">Read More</a>
+                <a href="project-asic.html" target="_blank" class="read-more-btn link">Read More</a>
               </div>
             </div>
           </div>
-          <div class="post col-md-4 website all col-10 mt-3 mt-md-0" data-aos="fade-up">
+          <div class="post col-md-4 fpga all col-10 mt-3 mt-md-0" data-aos="fade-up">
             <div class="card">
               <img src="images/tictactoe.png" class="card-img-top" alt="..." />
               <div class="card-body text-center">
-                <h4 class="card-title">TicTacToe Game</h4>
-                <span class="badge bg-secondary badge-pill">HTML&CSS</span>
-                <span class="badge bg-secondary badge-pill">JavaScript</span>
-                <span class="badge bg-secondary badge-pill mb-2">Game</span
+                <h4 class="card-title">SDR on FPGA</h4>
+                <span class="badge bg-secondary badge-pill">Verilog</span>
+                <span class="badge bg-secondary badge-pill">RFSoC</span>
+                <span class="badge bg-secondary badge-pill mb-2">FPGA</span
                 ><br />
-                <a href="#" class="read-more-btn link">Read More</a>
+                <a href="project-sdr.html" target="_blank" class="read-more-btn link">Read More</a>
               </div>
             </div>
           </div>
-          <div class="post col-md-4 all col-10 mt-3 mt-md-0" data-aos="fade-up">
+          <div class="post col-md-4 embedded all col-10 mt-3 mt-md-0" data-aos="fade-up">
             <div class="card">
               <img
                 src="images/lang-translator.png"
@@ -350,113 +355,88 @@
                 alt="..."
               />
               <div class="card-body text-center">
-                <h4 class="card-title">Lang Translator</h4>
-                <span class="badge bg-secondary badge-pill">HTML&CSS</span>
-                <span class="badge bg-secondary badge-pill">JavaScript</span>
-                <span class="badge bg-secondary badge-pill mb-2">Web App</span
+                <h4 class="card-title">RTOS Task Scheduler</h4>
+                <span class="badge bg-secondary badge-pill">C</span>
+                <span class="badge bg-secondary badge-pill">FreeRTOS</span>
+                <span class="badge bg-secondary badge-pill mb-2">Embedded</span
                 ><br />
-                <a href="#" class="read-more-btn link">Read More</a>
+                <a href="project-rtos.html" target="_blank" class="read-more-btn link">Read More</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- portfolio section ends here -->
+    <!-- projects section ends here -->
 
-    <!-- testimonial section starts  -->
-    <section class="testimonial mt-5 pt-5" id="testimonial">
-      <div class="row justify-content-evenly">
-        <div class="col-md-4 col-10" data-aos="slide-right">
-          <img src="images/tastimonials-img.png" class="img-fluid" alt="" />
-        </div>
-        <div class="col-md-6 col-10 mt-5" data-aos="slide-left">
-          <div class="heading">
-            <small>Testimonials</small>
-            <h3>Happy Clients Feedback</h3>
-            <!-- here we will use carousel element from bootstrap -->
-            <div
-              id="carouselExampleControls"
-              class="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div class="row justify-content-evenly">
-                    <div class="col-2 text-center">
-                      <i class="bi bi-quote"></i>
+    <!-- 
+      testimonial section starts
+      <section class="testimonial mt-5 pt-5" id="testimonial">
+        <div class="row justify-content-evenly">
+          <div class="col-md-4 col-10" data-aos="slide-right">
+            <img src="images/tastimonials-img.png" class="img-fluid" alt="" />
+          </div>
+          <div class="col-md-6 col-10 mt-5" data-aos="slide-left">
+            <div class="heading">
+              <small>Testimonials</small>
+              <h3>Happy Clients Feedback</h3>
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="row justify-content-evenly">
+                      <div class="col-2 text-center">
+                        <i class="bi bi-quote"></i>
+                      </div>
+                      <div class="col-10">
+                        <p class="text-muted">Placeholder for a client testimonial.</p>
+                        <h4>Client Name</h4>
+                        <small class="fs-6 text-muted">Client Title</small>
+                      </div>
                     </div>
-                    <div class="col-10">
-                      <p class="text-muted">
-                        Quisruam est, qui dolorem ipsum quia dolor sit amet,
-                        consecteaur aeci velit, sed quia non numquam eius modi
-                        tempora incidunt ut lao magnam aliquam quaerat ...
-                      </p>
-                      <h4>Kevin Andrew</h4>
-                      <small class="fs-6 text-muted">CEO of Company</small>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="row justify-content-evenly">
+                      <div class="col-2 text-center">
+                        <i class="bi bi-quote"></i>
+                      </div>
+                      <div class="col-10">
+                        <p class="text-muted">Placeholder for a client testimonial.</p>
+                        <h4>Client Name</h4>
+                        <small class="fs-6 text-muted">Client Title</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="row justify-content-evenly">
+                      <div class="col-2 text-center">
+                        <i class="bi bi-quote"></i>
+                      </div>
+                      <div class="col-10">
+                        <p class="text-muted">Placeholder for a client testimonial.</p>
+                        <h4>Client Name</h4>
+                        <small class="fs-6 text-muted">Client Title</small>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="carousel-item">
-                  <div class="row justify-content-evenly">
-                    <div class="col-2 text-center">
-                      <i class="bi bi-quote"></i>
-                    </div>
-                    <div class="col-10">
-                      <p class="text-muted">
-                        Quisruam est, qui dolorem ipsum quia dolor sit amet,
-                        consecteaur aeci velit, sed quia non numquam eius modi
-                        tempora incidunt ut lao magnam aliquam quaerat ...
-                      </p>
-                      <h4>Kevin Andrew</h4>
-                      <small class="fs-6 text-muted">CEO of Company</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="row justify-content-evenly">
-                    <div class="col-2 text-center">
-                      <i class="bi bi-quote"></i>
-                    </div>
-                    <div class="col-10">
-                      <p class="text-muted">
-                        Quisruam est, qui dolorem ipsum quia dolor sit amet,
-                        consecteaur aeci velit, sed quia non numquam eius modi
-                        tempora incidunt ut lao magnam aliquam quaerat ...
-                      </p>
-                      <h4>Kevin Andrew</h4>
-                      <small class="fs-6 text-muted">CEO of Company</small>
-                    </div>
-                  </div>
-                </div>
+                <button class="nextprev-btn rounded-pill prev-btn" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <i class="bi bi-arrow-left-circle-fill prev"></i>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="nextprev-btn rounded-pill next-btn" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <i class="bi bi-arrow-right-circle-fill next"></i>
+                  <span class="visually-hidden">Next</span>
+                </button>
               </div>
-              <button
-                class="nextprev-btn rounded-pill prev-btn"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev"
-              >
-                <i class="bi bi-arrow-left-circle-fill prev"></i>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button
-                class="nextprev-btn rounded-pill next-btn"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="next"
-              >
-                <i class="bi bi-arrow-right-circle-fill next"></i>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- testimonial ends here -->
+      </section>
+      testimonial ends here
+    -->
 
     <!-- blog section starts -->
-    <section class="blog mt-5 pb-5" id="blog">
+        <section class="blog mt-5 pb-5" id="blog">
       <div class="heading text-center pt-5">
         <small>Latest News</small>
         <h3>Blog & Articles</h3>
@@ -470,16 +450,15 @@
               alt="..."
             />
             <div class="card-body px-4">
-              <small>By Pawan Kumavat</small
+              <small>By Abdelhameed Mahmoud</small
               ><span class="ms-3">Mar 8,2022</span>
               <h4 class="card-title">
-                <a href="">Quis autem vea eum iure reprehenderit</a>
+                <a href="">The Future of RISC-V Processors</a>
               </h4>
               <p class="text-muted">
-                Dolor repellendus temporibus autem quibusdam officiis debitis
-                rerum nece aibus minima veniam.
+                An overview of the open-source instruction set architecture and its impact on the semiconductor industry.
               </p>
-              <a href="#" class="read-more-btn link" data-bs-toggle="modal" data-bs-target="#exampleModal1">Read More</a>
+              <a href="blog-riscv.html" target="_blank" class="read-more-btn link">Read More</a>
             </div>
           </div>
         </div>
@@ -491,16 +470,15 @@
               alt="..."
             />
             <div class="card-body px-4">
-              <small>By Pawan Kumavat</small
+              <small>By Abdelhameed Mahmoud</small
               ><span class="ms-3">Mar 8,2022</span>
               <h4 class="card-title">
-                <a href="">Quis autem vea eum iure reprehenderit</a>
+                <a href="">Getting Started with FPGA Development</a>
               </h4>
               <p class="text-muted">
-                Dolor repellendus temporibus autem quibusdam officiis debitis
-                rerum nece aibus minima veniam.
+                A beginner's guide to FPGA programming using VHDL, from basic logic gates to a simple project.
               </p>
-              <a href="#" class="read-more-btn link" data-bs-toggle="modal" data-bs-target="#exampleModal2">Read More</a>
+              <a href="blog-fpga.html" target="_blank" class="read-more-btn link">Read More</a>
             </div>
           </div>
         </div>
@@ -512,236 +490,19 @@
               alt="..."
             />
             <div class="card-body px-4">
-              <small>By Pawan Kumavat</small
+              <small>By Abdelhameed Mahmoud</small
               ><span class="ms-3">Mar 8,2022</span>
               <h4 class="card-title">
-                <a href="">Quis autem vea eum iure reprehenderit</a>
+                <a href="">Understanding the ASIC Design Flow</a>
               </h4>
               <p class="text-muted">
-                Dolor repellendus temporibus autem quibusdam officiis debitis
-                rerum nece aibus minima veniam.
+                From RTL design to GDSII tapeout, a look at the major steps involved in creating a custom chip.
               </p>
-              <a href="#" class="read-more-btn link" data-bs-toggle="modal" data-bs-target="#exampleModal3">Read More</a>
+              <a href="blog-asic.html" target="_blank" class="read-more-btn link">Read More</a>
             </div>
           </div>
         </div>
-        <!-- here we will make modals if Read more link is clicked the modal will popup -->
-        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              
-                <button type="button" class="btn-c rounded-pill" data-bs-dismiss="modal"><i class="bi bi-x-circle-fill"></i></button>
-              
-              <div class="modal-body px-4">
-                <div class="img">
-                  <img src="images/2048game.png" class="img-fluid" alt="">
-                </div>
-                <div class="content mt-3">
-                  <small>By Pawan Kumavat</small
-                    ><span class="text-muted ms-2">Mar 8,2022</span>
-                  <h4 class="card-title mt-3">Quis autem vea eum iure reprehenderit</h4>
-                  <div class="social-links mt-4">
-                      <button href="" class="rounded-pill dribble">
-                        <i class="bi bi-dribbble"></i>
-                      </button>
-                      <button href="" class="rounded-pill whatsapp">
-                        <i class="bi bi-whatsapp"></i>
-                      </button>
-                      <button href="" class="rounded-pill behance">
-                        <i class="bi bi-behance"></i>
-                      </button>
-                  </div>
-                  <p class="text-muted mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor eros a tellus auctor, nec suscipit nunc dignissim. Ut suscipit gravida augue sed elementum. Sed sed luctus nisl. Donec scelerisque nisi in sodales mattis. Vestibulum suscipit odio ac enim blandit sollicitudin. Aliquam ultrices sem quis urna placerat interdum. Etiam rutrum, quam sagittis tristique mollis, libero arcu scelerisque erat, eget tincidunt eros diam quis nunc.</p>
-                </div>
-              </div>
-              <div class="heading px-2">
-                <h3 class="fs-3 ms-3">Leave A Comment</h3>
-              </div>
-              <div class="contact-form ms-3 mt-3 pb-4 px-2">
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Name"
-                  />
-                </div>
-                <div class="mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="E-mail"
-                  />
-                </div>
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Mobile No."
-                  />
-                </div>
-                <div class="mb-3">
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    placeholder="Message"
-                    rows="5"
-                  ></textarea>
-                </div>
-                <button class="c-btn h-btn mt-3 py-2 px-4 rounded-pill">
-                  Submit
-                </button>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              
-                <button type="button" class="btn-c rounded-pill" data-bs-dismiss="modal"><i class="bi bi-x-circle-fill"></i></button>
-              
-              <div class="modal-body px-4">
-                <div class="img">
-                  <img src="images/currency-converter.png" class="img-fluid" alt="">
-                </div>
-                <div class="content mt-3">
-                  <small>By Pawan Kumavat</small
-                    ><span class="text-muted ms-2 ms-md-0">Mar 8,2022</span>
-                  <h4 class="card-title mt-3">Quis autem vea eum iure reprehenderit</h4>
-                  <div class="social-links mt-4">
-                      <button href="" class="rounded-pill dribble">
-                        <i class="bi bi-dribbble"></i>
-                      </button>
-                      <button href="" class="rounded-pill whatsapp">
-                        <i class="bi bi-whatsapp"></i>
-                      </button>
-                      <button href="" class="rounded-pill behance">
-                        <i class="bi bi-behance"></i>
-                      </button>
-                  </div>
-                  <p class="text-muted mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor eros a tellus auctor, nec suscipit nunc dignissim. Ut suscipit gravida augue sed elementum. Sed sed luctus nisl. Donec scelerisque nisi in sodales mattis. Vestibulum suscipit odio ac enim blandit sollicitudin. Aliquam ultrices sem quis urna placerat interdum. Etiam rutrum, quam sagittis tristique mollis, libero arcu scelerisque erat, eget tincidunt eros diam quis nunc.</p>
-                </div>
-              </div>
-              <div class="heading px-2">
-                <h3 class="fs-3 ms-3">Leave A Comment</h3>
-              </div>
-              <div class="contact-form ms-3 mt-3 pb-4 px-2">
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Name"
-                  />
-                </div>
-                <div class="mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="E-mail"
-                  />
-                </div>
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Mobile No."
-                  />
-                </div>
-                <div class="mb-3">
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    placeholder="Message"
-                    rows="5"
-                  ></textarea>
-                </div>
-                <button class="c-btn h-btn mt-3 py-2 px-4 rounded-pill">
-                  Submit
-                </button>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              
-                <button type="button" class="btn-c rounded-pill" data-bs-dismiss="modal"><i class="bi bi-x-circle-fill"></i></button>
-              
-              <div class="modal-body px-4">
-                <div class="img">
-                  <img src="images/dictionary.png" class="img-fluid" alt="">
-                </div>
-                <div class="content mt-3">
-                  <small>By Pawan Kumavat</small
-                    ><span class="text-muted ms-2 ms-md-0">Mar 8,2022</span>
-                  <h4 class="card-title mt-3">Quis autem vea eum iure reprehenderit</h4>
-                  <div class="social-links mt-4">
-                      <button href="" class="rounded-pill dribble">
-                        <i class="bi bi-dribbble"></i>
-                      </button>
-                      <button href="" class="rounded-pill whatsapp">
-                        <i class="bi bi-whatsapp"></i>
-                      </button>
-                      <button href="" class="rounded-pill behance">
-                        <i class="bi bi-behance"></i>
-                      </button>
-                  </div>
-                  <p class="text-muted mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor eros a tellus auctor, nec suscipit nunc dignissim. Ut suscipit gravida augue sed elementum. Sed sed luctus nisl. Donec scelerisque nisi in sodales mattis. Vestibulum suscipit odio ac enim blandit sollicitudin. Aliquam ultrices sem quis urna placerat interdum. Etiam rutrum, quam sagittis tristique mollis, libero arcu scelerisque erat, eget tincidunt eros diam quis nunc.</p>
-                </div>
-              </div>
-              <div class="heading px-2">
-                <h3 class="fs-3 ms-3">Leave A Comment</h3>
-              </div>
-              <div class="contact-form ms-3 mt-3 pb-4 px-2">
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Name"
-                  />
-                </div>
-                <div class="mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="E-mail"
-                  />
-                </div>
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Mobile No."
-                  />
-                </div>
-                <div class="mb-3">
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    placeholder="Message"
-                    rows="5"
-                  ></textarea>
-                </div>
-                <button class="c-btn h-btn mt-3 py-2 px-4 rounded-pill">
-                  Submit
-                </button>
-              </div>
-              
-            </div>
-          </div>
-        </div>
+        
       </div>
     </section>
     <!-- blog section ends here -->
@@ -759,7 +520,7 @@
               <i class="bi bi-geo-alt-fill"></i>
             </div>
             <div class="col-11">
-              <p>121 King Street Melbourne, 3000, Australia</p>
+              <p>103 Al-Fath City Buildings, Nasr City, Cairo Governorate, Egypt</p>
             </div>
           </div>
           <div class="row justify-content-evenly">
@@ -767,7 +528,17 @@
               <i class="bi bi-telephone-fill"></i>
             </div>
             <div class="col-11">
-              <p>+91 9527818693</p>
+              <p>+20 01113392306</p>
+
+            </div>
+          </div>
+			<div class="row justify-content-evenly">
+            <div class="col-1">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <div class="col-11">
+              <p>+20 01099743065</p>
+
             </div>
           </div>
           <div class="row justify-content-evenly">
@@ -775,55 +546,62 @@
               <i class="bi bi-send-fill"></i>
             </div>
             <div class="col-11">
-              <p>codewithpawan@gmail.com</p>
+              <p>engabdelhameid.mahmoud@gmail.com</p>
             </div>
           </div>
           <div class="row justify-content-evenly">
             <div class="col-1">
-              <i class="bi bi-globe-americas"></i>
-            </div>
-            <div class="col-11">
-              <p>codingpawan.com</p>
+                           
+
             </div>
           </div>
         </div>
         <div class="col-md-5 col-10 mt-3 mt-md-0" data-aos="slide-left">
           <div class="contact-form">
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Name"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="email"
-                class="form-control"
-                id="exampleFormControlInput1"
-                placeholder="E-mail"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Mobile No."
-              />
-            </div>
-            <div class="mb-3">
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                placeholder="Message"
-                rows="5"
-              ></textarea>
-            </div>
-            <button class="c-btn h-btn mt-3 py-3 px-5 rounded-pill">
-              Submit
-            </button>
+            <form action="https://formspree.io/f/your_form_id" method="POST">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="Name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="E-mail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="mobile"
+                  class="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="Mobile No."
+                />
+              </div>
+              <div class="mb-3">
+                <textarea
+                  class="form-control"
+                  name="message"
+                  id="exampleFormControlTextarea1"
+                  placeholder="Message"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="c-btn h-btn mt-3 py-3 px-5 rounded-pill">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -849,7 +627,7 @@
         <div class="vr"></div>
         <a href="#service">Service</a>
         <div class="vr"></div>
-        <a href="#portfolio">Portfolio</a>
+        <a href="#projects">Projects</a>
         <div class="vr"></div>
         <a href="#blog">Blog</a>
         <div class="vr"></div>
@@ -859,16 +637,18 @@
         <button href="" class="rounded-pill dribble">
           <i class="bi bi-dribbble"></i>
         </button>
-        <button href="" class="rounded-pill whatsapp">
-          <i class="bi bi-whatsapp"></i>
-        </button>
+		<button class="rounded-pill whatsapp"
+				onclick="window.open('https://wa.me/201113392306', '_blank')"
+				aria-label="Open WhatsApp">
+		  <i class="bi bi-whatsapp"></i>
+		</button>
         <button href="" class="rounded-pill behance">
           <i class="bi bi-behance"></i>
         </button>
       </div>
       <hr class="text-muted my-4" />
 
-      <p>Copyright 2022 Portfolio | All Rights Reserved.</p>
+      <p>Copyright 2025 Portfolio | All Rights Reserved.</p>
     </footer>
     <!-- footer section ends here -->
 
@@ -890,6 +670,19 @@
     </script>
     <!-- custom js file linking -->
     <script src="js/script.js"></script>
+
+    <!-- Profile Picture Modal -->
+    <div class="modal fade" id="profilePictureModal" tabindex="-1" aria-labelledby="profilePictureModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <img src="images/Profile.png" class="img-fluid" alt="Abdelhameed Mahmoud profile picture">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Modals Removed -->
     
   </body>
 </html>

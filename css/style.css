@@ -44,22 +44,21 @@ body{
 }
 /* styling home section starts */
 .home{
-    background: linear-gradient(33deg, rgba(242,242,255,1) 0%, rgba(235,249,255,1) 100%);
+    background: linear-gradient(45deg, #211e39, #3f396d);
+    background-size: cover;
+    background-position: center;
     padding: 30px 0px 10px 0px;
 }
 .home h2{
     font-size: 3rem;
     line-height: 4rem;
-}
-.c-orange{
-    color: #6f34fe;
-    font-weight: 700;
-    font-size: 4rem;
+    color: #fff;
 }
 .home p{
     width: fit-content;
     margin-top: 1rem;
     font-size: 1.2rem;
+    color: #fff;
 }
 .h-btn:hover{
     background: #6f34fe;
@@ -143,54 +142,32 @@ body{
 .skill{
     background-color: rgb(234, 234, 249);
 }
-.progress-card{
-    padding: 12% 10% 10% 15%;
+.skill-category {
     background-color: #fff;
-    text-align: center;
-    border-radius: 10%;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    height: 100%;
 }
-.progress-card:hover{
-    transform: scale(1.1,1.1);
-    transition-duration: 0.6s;
-}
-.circular-progress{
-    position: relative;
-    height: 130px;
-    width: 130px;
-    border-radius: 50%;
-    background: conic-gradient(#7d2ae8 3.6deg, #ededed 0deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.circular-progress::before{
-    content: "";
-    position: absolute;
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    background-color: #fff;
-}
-.progress-value{
-    position: relative;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-.html-progress{
-    color: #fca61f;
-}
-.javascript-progress{
-    color: #6f34fe;
-}
-.php-progress{
-    color: #20c997;
-}
-.reactjs-progress{
+.skill-category h4 {
     color: #3f396d;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
-.text{
-    font-size: 1.2rem;
-    font-weight: 500;
+.skill-category ul li {
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+.skill-category ul li i {
+    color: #fca61f;
+    margin-right: 10px;
+}
+.skill-sub-heading {
+    font-weight: 700;
+    color: #6f34fe;
+    font-size: 1.1rem;
 }
 .heading p{
     font-size: 1.3rem;
