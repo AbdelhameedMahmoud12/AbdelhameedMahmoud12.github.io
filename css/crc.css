@@ -1,0 +1,122 @@
+/* =========================
+   CRC Project Custom Styles
+   ========================= */
+
+/* Main Title */
+h1 {
+  font-weight: 700;
+  background: linear-gradient(90deg, #3f396d, #7f5af0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Project Overview Section */
+.project-content h3 {
+  color: #3f396d;
+  font-weight: 600;
+  position: relative;
+}
+
+.project-content h3::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #7f5af0;
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+/* Images */
+.project-content img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-content img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Styling */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead {
+  background: linear-gradient(90deg, #3f396d, #7f5af0);
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.table tbody tr:hover {
+  background-color: #f5f5ff;
+  transition: background-color 0.2s ease;
+}
+
+/* Badges */
+.badge {
+  font-size: 0.9rem;
+  padding: 0.6em 0.9em;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.badge.bg-primary {
+  background: linear-gradient(135deg, #7f5af0, #3f396d);
+}
+
+.badge.bg-success {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+}
+
+/* GitHub Button */
+.btn-outline-dark {
+  border: 2px solid #3f396d;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+  background: linear-gradient(90deg, #3f396d, #7f5af0);
+  color: #fff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(127, 90, 240, 0.3);
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(90deg, #3f396d, #1f1d36);
+}
+
+footer h3 {
+  font-weight: 600;
+}
+
+footer a {
+  color: #bbb;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+/* Social buttons */
+.social-links button {
+  background: #fff;
+  border: none;
+  width: 45px;
+  height: 45px;
+  margin: 0 6px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.social-links button:hover {
+  transform: translateY(-4px) rotate(6deg);
+  background: linear-gradient(135deg, #7f5af0, #3f396d);
+  color: #fff;
+}
