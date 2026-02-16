@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISC-V Architecture Deep Dive - Abdelhameed Mahmoud</title>
+    <meta name="description" content="Comprehensive technical guide to RISC-V architecture, instruction set, and implementation strategies for custom processor design.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-navy: #1a1a2e;
+            --primary-copper: #e67e22;
+            --accent-gray: #f8f9fa;
+            --text-charcoal: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--accent-gray);
+            color: var(--text-charcoal);
+            line-height: 1.7;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-copper);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .blog-header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('resources/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .blog-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-copper) 0%, #f39c12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-copper) 0%, #f39c12 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(230, 126, 34, 0.3);
+        }
+        
+        .article-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-copper);
+        }
+        
+        .article-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .article-content code {
+            background: #f1f5f9;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #dc2626;
+        }
+        
+        .article-content pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-copper);
+            background: #f8fafc;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .isa-table {
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin: 1.5rem 0;
+        }
+        
+        .isa-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .isa-table th {
+            background: var(--primary-navy);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .isa-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .isa-table tr:hover {
+            background: #f9fafb;
+        }
+        
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .section-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .share-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .share-twitter {
+            background: #1da1f2;
+            color: white;
+        }
+        
+        .share-linkedin {
+            background: #0077b5;
+            color: white;
+        }
+        
+        .share-facebook {
+            background: #4267b2;
+            color: white;
+        }
+        
+        .architecture-diagram {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .pipeline-stage {
+            background: linear-gradient(135deg, var(--primary-copper) 0%, #f39c12 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            font-weight: 600;
+        }
+        
+        .arrow {
+            color: var(--primary-copper);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="resources/profile.png" alt="Profile" class="w-10 h-10 rounded-full">
+                    <span class="font-display font-semibold text-xl text-gray-900">Abdelhameed Mahmoud</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Home</a>
+                    <a href="index.html#projects" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Projects</a>
+                    <a href="index.html#skills" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Skills</a>
+                    <a href="index.html#blog" class="nav-link text-orange-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Contact</a>
+                </div>
+                
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <section class="blog-header pt-24 pb-16">
+        <div class="blog-content max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <div class="text-center">
+                <div class="mb-6">
+                    <span class="inline-block px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium mb-4">
+                        Technical Deep Dive
+                    </span>
+                </div>
+                
+                <h1 class="font-display text-4xl lg:text-6xl font-bold mb-6">
+                    <span class="gradient-text">RISC-V Architecture</span> Deep Dive
+                </h1>
+                
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Exploring the open-source instruction set architecture that's revolutionizing processor design
+                </p>
+                
+                <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>December 20, 2024</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>12 min read</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        <span>1,923 views</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12">
+                <!-- Table of Contents -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24 bg-white rounded-xl p-6 shadow-lg">
+                        <h3 class="font-display text-lg font-semibold mb-4 text-gray-900">Table of Contents</h3>
+                        <nav class="space-y-2">
+                            <a href="#introduction" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">Introduction</a>
+                            <a href="#history" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">History & Philosophy</a>
+                            <a href="#architecture" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">Base Architecture</a>
+                            <a href="#instruction-set" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">Instruction Set</a>
+                            <a href="#privilege" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">Privilege Levels</a>
+                            <a href="#extensions" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">Extensions</a>
+                            <a href="#implementation" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">Implementation</a>
+                            <a href="#conclusion" class="block text-sm text-gray-600 hover:text-orange-600 transition-colors py-1">Conclusion</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="lg:col-span-3">
+                    <div class="article-content bg-white rounded-xl p-8 shadow-lg">
+                        <!-- Introduction -->
+                        <section id="introduction" class="section-reveal">
+                            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                                RISC-V is an open standard Instruction Set Architecture (ISA) that has been gaining significant traction in the semiconductor industry. Unlike proprietary ISAs, RISC-V is open-source, allowing anyone to design, manufacture, and sell RISC-V chips and software without licensing fees.
+                            </p>
+
+                            <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8 rounded-r-lg">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm text-green-700">
+                                            <strong>Key Advantage:</strong> RISC-V's modular design allows implementers to choose only the features they need, resulting in smaller, more efficient processors.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- History & Philosophy -->
+                        <section id="history" class="section-reveal">
+                            <h2>History and Design Philosophy</h2>
+                            
+                            <p>RISC-V was developed at UC Berkeley in 2010 as a modern, open-source alternative to proprietary ISAs. The project aimed to create a simple, extensible architecture suitable for everything from microcontrollers to supercomputers.</p>
+
+                            <h3>Design Principles:</h3>
+                            <ul>
+                                <li><strong>Simplicity:</strong> Keep the base ISA small and regular</li>
+                                <li><strong>Modularity:</strong> Allow optional extensions for specific needs</li>
+                                <li><strong>Stability:</strong> The base ISA is frozen and will never change</li>
+                                <li><strong>Efficiency:</strong> Enable high-performance, low-power implementations</li>
+                                <li><strong>Openness:</strong> Freely available to everyone</li>
+                            </ul>
+
+                            <blockquote>
+                                "RISC-V is not just an ISA, it's a platform for innovation. The open nature allows researchers and companies to experiment with new ideas without being constrained by proprietary licenses."
+                            </blockquote>
+
+                            <p>The RISC-V Foundation, now RISC-V International, was established in 2015 to steward the architecture's development and promote adoption across the industry.</p>
+                        </section>
+
+                        <!-- Base Architecture -->
+                        <section id="architecture" class="section-reveal">
+                            <h2>Base Architecture</h2>
+                            
+                            <p>RISC-V uses a load-store architecture with 32 general-purpose registers (x0-x31). Register x0 is hardwired to zero, which simplifies many common operations and reduces instruction count.</p>
+
+                            <div class="architecture-diagram">
+                                <h3 class="text-xl font-semibold mb-4">RISC-V Base Integer Instruction Formats</h3>
+                                <div class="grid md:grid-cols-2 gap-6 text-left">
+                                    <div>
+                                        <h4 class="font-semibold mb-2">R-Type (Register)</h4>
+                                        <div class="font-mono text-sm bg-gray-100 p-3 rounded">
+                                            | 31-25 | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |<br>
+                                            | funct7 | rs2 | rs1 | funct3 | rd | opcode |
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold mb-2">I-Type (Immediate)</h4>
+                                        <div class="font-mono text-sm bg-gray-100 p-3 rounded">
+                                            | 31-20 | 19-15 | 14-12 | 11-7 | 6-0 |<br>
+                                            | imm[11:0] | rs1 | funct3 | rd | opcode |
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold mb-2">S-Type (Store)</h4>
+                                        <div class="font-mono text-sm bg-gray-100 p-3 rounded">
+                                            | 31-25 | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |<br>
+                                            | imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode |
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold mb-2">B-Type (Branch)</h4>
+                                        <div class="font-mono text-sm bg-gray-100 p-3 rounded">
+                                            | 31-25 | 24-20 | 19-15 | 14-12 | 11-7 | 6-0 |<br>
+                                            | imm[12,10:5] | rs2 | rs1 | funct3 | imm[4:1,11] | opcode |
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Addressing Modes:</h3>
+                            <ul>
+                                <li><strong>Base + Offset:</strong> Used for load/store operations</li>
+                                <li><strong>PC-Relative:</strong> Used for branches and jumps</li>
+                                <li><strong>Absolute:</strong> Used for jumps to specific addresses</li>
+                            </ul>
+
+                            <p>The instruction encoding is designed to be regular and simple, making decoding straightforward and enabling efficient hardware implementations.</p>
+                        </section>
+
+                        <!-- Instruction Set -->
+                        <section id="instruction-set" class="section-reveal">
+                            <h2>Base Instruction Set</h2>
+                            
+                            <p>The RISC-V base integer instruction set is intentionally minimal, providing just enough functionality for general-purpose computing. This simplicity enables efficient implementations while optional extensions add specialized capabilities.</p>
+
+                            <div class="isa-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Instructions</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Arithmetic</td>
+                                            <td><code>ADD, SUB, ADD I</code></td>
+                                            <td>Addition and subtraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Logical</td>
+                                            <td><code>AND, OR, XOR</code></td>
+                                            <td>Bitwise logical operations</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shift</td>
+                                            <td><code>SLL, SRL, SRA</code></td>
+                                            <td>Shift operations</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compare</td>
+                                            <td><code>SLT, SLTU</code></td>
+                                            <td>Set less than (signed/unsigned)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Branch</td>
+                                            <td><code>BEQ, BNE, BLT, BGE</code></td>
+                                            <td>Conditional branches</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jump</td>
+                                            <td><code>JAL, JALR</code></td>
+                                            <td>Jump and link operations</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Load/Store</td>
+                                            <td><code>LW, SW, LB, SB</code></td>
+                                            <td>Memory access operations</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>Example: RISC-V Assembly Code</h3>
+                            <pre><code># Simple loop counting from 10 to 0
+    li x5, 10          # Load immediate 10 into register x5
+loop:
+    addi x5, x5, -1    # Decrement x5 by 1
+    bnez x5, loop      # Branch if x5 is not zero
+    # Loop ends here
+    
+# Function call example
+    addi sp, sp, -16   # Allocate stack space
+    sw ra, 12(sp)      # Save return address
+    jal ra, function   # Call function
+    lw ra, 12(sp)      # Restore return address
+    addi sp, sp, 16    # Deallocate stack space
+    
+function:
+    # Function implementation
+    jr ra              # Return from function</code></pre>
+
+                            <p>The instruction set is designed to be orthogonal and regular, making it easy for compilers to generate efficient code and for hardware to implement the instructions efficiently.</p>
+                        </section>
+
+                        <!-- Privilege Levels -->
+                        <section id="privilege" class="section-reveal">
+                            <h2>Privilege Levels</h2>
+                            
+                            <p>RISC-V defines several privilege levels to support operating systems and provide security boundaries between different levels of software:</p>
+
+                            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                                    <h3 class="font-semibold text-red-900 mb-2">Machine Mode (M)</h3>
+                                    <p class="text-red-800 text-sm">Highest privilege level. Has full access to all features and memory. Required for all implementations.</p>
+                                </div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                                    <h3 class="font-semibold text-yellow-900 mb-2">Supervisor Mode (S)</h3>
+                                    <p class="text-yellow-800 text-sm">Used by operating systems. Can access most features but with some restrictions. Optional but common.</p>
+                                </div>
+                                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                                    <h3 class="font-semibold text-green-900 mb-2">User Mode (U)</h3>
+                                    <p class="text-green-800 text-sm">Lowest privilege level. Used for application code. Has restricted access to system resources.</p>
+                                </div>
+                            </div>
+
+                            <h3>Control and Status Registers (CSRs)</h3>
+                            <p>CSRs are special-purpose registers used to configure and control the processor. They are accessed using dedicated instructions:</p>
+
+                            <pre><code># CSR access examples
+    csrr x5, mstatus    # Read mstatus CSR into x5
+    csrw mstatus, x5    # Write x5 to mstatus CSR
+    csrrs x6, mie, x7   # Read-modify-write: set bits in mie
+    
+# Common CSRs
+    mstatus    # Machine status register
+    mepc       # Machine exception program counter
+    mtvec      # Machine trap vector base address
+    mcycle     # Machine cycle counter</code></pre>
+
+                            <p>The privilege system allows for secure operating system implementation while maintaining the simplicity of the base architecture.</p>
+                        </section>
+
+                        <!-- Extensions -->
+                        <section id="extensions" class="section-reveal">
+                            <h2>Standard Extensions</h2>
+                            
+                            <p>One of RISC-V's key strengths is its modular design. The base integer instruction set is kept minimal, while optional extensions provide additional functionality for specific applications.</p>
+
+                            <div class="isa-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Extension</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>M</code></td>
+                                            <td>Multiply/Divide</td>
+                                            <td>Integer multiplication and division</td>
+                                            <td>Ratified</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>A</code></td>
+                                            <td>Atomic</td>
+                                            <td>Atomic memory operations for multi-core</td>
+                                            <td>Ratified</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>F</code></td>
+                                            <td>Single-Precision FP</td>
+                                            <td>32-bit floating-point operations</td>
+                                            <td>Ratified</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>D</code></td>
+                                            <td>Double-Precision FP</td>
+                                            <td>64-bit floating-point operations</td>
+                                            <td>Ratified</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>C</code></td>
+                                            <td>Compressed</td>
+                                            <td>16-bit compressed instructions</td>
+                                            <td>Ratified</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>V</code></td>
+                                            <td>Vector</td>
+                                            <td>Vector operations for data parallelism</td>
+                                            <td>Ratified</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>Example: Using Extensions</h3>
+                            <pre><code># Example using M extension (multiply/divide)
+    mul x5, x6, x7      # x5 = x6 * x7 (signed)
+    div x8, x9, x10     # x8 = x9 / x10 (signed)
+    
+# Example using A extension (atomic)
+    lr.w x5, (x6)       # Load reserved word
+    sc.w x7, x8, (x6)   # Store conditional word
+    amoadd.w x5, x6, (x7) # Atomic memory add
+    
+# Example using F/D extensions (floating point)
+    fadd.s f0, f1, f2   # Single-precision add
+    fadd.d f3, f4, f5   # Double-precision add
+    fcvt.w.d x5, f6     # Convert double to integer</code></pre>
+
+                            <p>This modular approach allows implementers to create processors tailored to their specific needs, from tiny microcontrollers to high-performance computing systems.</p>
+                        </section>
+
+                        <!-- Implementation -->
+                        <section id="implementation" class="section-reveal">
+                            <h2>Implementation Strategies</h2>
+                            
+                            <p>Implementing a RISC-V processor involves several key design decisions based on performance requirements, power constraints, and target applications.</p>
+
+                            <h3>Microarchitecture Options:</h3>
+                            <ul>
+                                <li><strong>Single-Cycle:</strong> Simple, predictable timing, lower performance</li>
+                                <li><strong>Multi-Cycle:</strong> Better resource utilization, moderate complexity</li>
+                                <li><strong>Pipelined:</strong> Higher performance, handles hazards</li>
+                                <li><strong>Superscalar:</strong> Multiple instructions per cycle, complex</li>
+                                <li><strong>Out-of-Order:</strong> High performance, complex implementation</li>
+                            </ul>
+
+                            <div class="architecture-diagram">
+                                <h3 class="text-xl font-semibold mb-4">Classic 5-Stage Pipeline</h3>
+                                <div class="flex flex-wrap justify-center items-center">
+                                    <div class="pipeline-stage">IF</div>
+                                    <span class="arrow">→</span>
+                                    <div class="pipeline-stage">ID</div>
+                                    <span class="arrow">→</span>
+                                    <div class="pipeline-stage">EX</div>
+                                    <span class="arrow">→</span>
+                                    <div class="pipeline-stage">MEM</div>
+                                    <span class="arrow">→</span>
+                                    <div class="pipeline-stage">WB</div>
+                                </div>
+                                <div class="mt-4 text-sm text-gray-600">
+                                    <div><strong>IF:</strong> Instruction Fetch</div>
+                                    <div><strong>ID:</strong> Instruction Decode</div>
+                                    <div><strong>EX:</strong> Execute</div>
+                                    <div><strong>MEM:</strong> Memory Access</div>
+                                    <div><strong>WB:</strong> Write Back</div>
+                                </div>
+                            </div>
+
+                            <h3>Design Considerations:</h3>
+                            <ul>
+                                <li><strong>Hazard Handling:</strong> Data, control, and structural hazards</li>
+                                <li><strong>Branch Prediction:</strong> Reducing pipeline stalls</li>
+                                <li><strong>Cache Hierarchy:</strong> Memory system design</li>
+                                <li><strong>Virtual Memory:</strong> MMU and TLB implementation</li>
+                                <li><strong>Multi-core Support:</strong> Coherency and synchronization</li>
+                            </ul>
+
+                            <blockquote>
+                                "The beauty of RISC-V is that you can start with a simple implementation and add complexity as needed. This makes it ideal for both educational purposes and commercial products."
+                            </blockquote>
+
+                            <h3>Toolchain and Ecosystem</h3>
+                            <p>RISC-V benefits from a rich ecosystem of tools and software:</p>
+                            <ul>
+                                <li><strong>GCC/LLVM:</strong> Compiler support</li>
+                                <li><strong>QEMU:</strong> Emulation and testing</li>
+                                <li><strong>Linux/BSD:</strong> Operating system support</li>
+                                <li><strong>Debug Tools:</strong> GDB, OpenOCD</li>
+                                <li><strong>Verification:</strong> Formal verification frameworks</li>
+                            </ul>
+                        </section>
+
+                        <!-- Conclusion -->
+                        <section id="conclusion" class="section-reveal">
+                            <h2>Future of RISC-V</h2>
+                            
+                            <p>RISC-V represents a fundamental shift in how we approach processor design. Its open nature and modular architecture are driving innovation across the industry, from embedded devices to high-performance computing.</p>
+
+                            <h3>Key Advantages:</h3>
+                            <ul>
+                                <li><strong>No Licensing Fees:</strong> Reduces cost and barriers to entry</li>
+                                <li><strong>Customizability:</strong> Tailor processors to specific applications</li>
+                                <li><strong>Innovation:</strong> Enables experimentation with new ideas</li>
+                                <li><strong>Education:</strong> Ideal for teaching computer architecture</li>
+                                <li><strong>Community:</strong> Growing ecosystem of tools and support</li>
+                            </ul>
+
+                            <h3>Current Adoption:</h3>
+                            <p>RISC-V is being adopted across various sectors:</p>
+                            <ul>
+                                <li><strong>Embedded Systems:</strong> Microcontrollers, IoT devices</li>
+                                <li><strong>Mobile:</strong> Application processors, modems</li>
+                                <li><strong>Automotive:</strong> ADAS, infotainment systems</li>
+                                <li><strong>Data Centers:</strong> Accelerators, storage controllers</li>
+                                <li><strong>Research:</strong> Academic and industrial research</li>
+                            </ul>
+
+                            <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6 mt-8">
+                                <h3 class="font-semibold text-green-900 mb-2">Getting Started with RISC-V:</h3>
+                                <ul class="text-green-800 space-y-1">
+                                    <li>• Start with the official RISC-V specifications</li>
+                                    <li>• Experiment with existing soft-cores and tools</li>
+                                    <li>• Join the RISC-V community forums and mailing lists</li>
+                                    <li>• Contribute to open-source RISC-V projects</li>
+                                    <li>• Consider RISC-V for your next embedded project</li>
+                                </ul>
+                            </div>
+
+                            <p>As the RISC-V ecosystem continues to mature, we can expect to see even more innovative applications and implementations. The open nature of RISC-V ensures that it will continue to evolve based on the needs of the community, making it an exciting platform for the future of computing.</p>
+                        </section>
+
+                        <!-- Author Bio -->
+                        <div class="bg-gray-50 rounded-xl p-8 mt-12 section-reveal">
+                            <div class="flex items-start space-x-6">
+                                <img src="resources/profile.png" alt="Abdelhameed Mahmoud" class="w-20 h-20 rounded-full">
+                                <div>
+                                    <h3 class="font-display text-xl font-semibold text-gray-900 mb-2">About the Author</h3>
+                                    <p class="text-gray-600 mb-4">
+                                        Abdelhameed Mahmoud is an Electronics Engineer with extensive experience in processor design and RISC-V implementation. 
+                                        He has designed multiple RISC-V cores for various applications and actively contributes to the RISC-V ecosystem.
+                                    </p>
+                                    <div class="flex space-x-4">
+                                        <a href="index.html" class="text-orange-600 hover:text-orange-700 font-medium">View Portfolio</a>
+                                        <a href="index.html#contact" class="text-orange-600 hover:text-orange-700 font-medium">Get in Touch</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Share Buttons -->
+                        <div class="share-buttons section-reveal">
+                            <h3 class="font-semibold text-gray-900 mb-4">Share this article:</h3>
+                            <a href="https://twitter.com/intent/tweet?text=RISC-V%20Architecture%20Deep%20Dive%20-%20A%20comprehensive%20guide%20to%20the%20open-source%20ISA&url=https://yourdomain.com/blog-riscv.html" 
+                               class="share-btn share-twitter" target="_blank" rel="noopener">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                </svg>
+                                Twitter
+                            </a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://yourdomain.com/blog-riscv.html" 
+                               class="share-btn share-linkedin" target="_blank" rel="noopener">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                                LinkedIn
+                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourdomain.com/blog-riscv.html" 
+                               class="share-btn share-facebook" target="_blank" rel="noopener">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                                Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Articles -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold text-gray-900 mb-4">Related Articles</h2>
+                <p class="text-xl text-gray-600">More insights on processor design and architecture</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <article class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-blue-600 font-bold text-lg">ASIC</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">ASIC Design Flow</h3>
+                            <p class="text-gray-600 text-sm">Complete guide to ASIC implementation</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Comprehensive overview of the ASIC design flow from specification to tape-out, including RTL design and verification.
+                    </p>
+                    <a href="blog-asic.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                </article>
+                
+                <article class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-purple-600 font-bold text-lg">DFT</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">Design for Testability</h3>
+                            <p class="text-gray-600 text-sm">Testing strategies for complex designs</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Essential DFT techniques including scan chains, BIST, and JTAG for ensuring testability and reliability.
+                    </p>
+                    <a href="blog-DFT.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                </article>
+                
+                <article class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-red-600 font-bold text-lg">VLSI</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">VLSI Design</h3>
+                            <p class="text-gray-600 text-sm">Very Large Scale Integration techniques</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Advanced VLSI design methodologies, floorplanning strategies, and optimization techniques for high-performance ICs.
+                    </p>
+                    <a href="blog-vlsi.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-6">
+                    <img src="resources/profile.png" alt="Profile" class="w-12 h-12 rounded-full">
+                    <span class="font-display text-2xl font-semibold">Abdelhameed Mahmoud</span>
+                </div>
+                
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Electronics Engineer passionate about creating innovative hardware solutions and pushing the boundaries of digital design.
+                </p>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2024 Abdelhameed Mahmoud. All rights reserved. Built with modern web technologies and optimized for performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            // Toggle mobile menu (implement as needed)
+            console.log('Mobile menu toggled');
+        });
+
+        // Smooth scrolling for table of contents
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Progress indicator
+        window.addEventListener('scroll', function() {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.documentElement.style.setProperty('--scroll-progress', scrolled + '%');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdelhameed Mahmoud - Electronics Engineer</title>
+    <meta name="description" content="Professional portfolio of Abdelhameed Mahmoud, Electronics Engineer specializing in Digital IC Design, FPGA Prototyping, and Embedded Systems.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-navy: #1a1a2e;
+            --primary-copper: #e67e22;
+            --accent-gray: #f8f9fa;
+            --text-charcoal: #2c3e50;
+            --skill-green: #7fb069;
+            --skill-blue: #6b9bd1;
+            --skill-gray: #8b7d6b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--accent-gray);
+            color: var(--text-charcoal);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('resources/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-copper) 0%, #f39c12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-copper) 0%, #f39c12 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(230, 126, 34, 0.3);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card img {
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .skill-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-copper) 0%, #f39c12 100%);
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-copper);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .section-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 2px solid var(--primary-copper);
+            background: transparent;
+            color: var(--primary-copper);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-copper);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: auto;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="resources/profile.png" alt="Profile" class="w-10 h-10 rounded-full">
+                    <span class="font-display font-semibold text-xl text-gray-900">Abdelhameed Mahmoud</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Home</a>
+                    <a href="#projects" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Projects</a>
+                    <a href="#skills" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Skills</a>
+                    <a href="#blog" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Blog</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-orange-600 font-medium">Contact</a>
+                </div>
+                
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-orange-600">Home</a>
+                <a href="#projects" class="block px-3 py-2 text-gray-700 hover:text-orange-600">Projects</a>
+                <a href="#skills" class="block px-3 py-2 text-gray-700 hover:text-orange-600">Skills</a>
+                <a href="#blog" class="block px-3 py-2 text-gray-700 hover:text-orange-600">Blog</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-orange-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center relative">
+        <div class="floating-shapes">
+            <div class="shape w-16 h-16 bg-orange-500 rounded-full" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="shape w-12 h-12 bg-orange-400 rounded-lg" style="left: 80%; animation-delay: 5s;"></div>
+            <div class="shape w-20 h-20 bg-orange-300 rounded-full" style="left: 60%; animation-delay: 10s;"></div>
+        </div>
+        
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="font-display text-5xl lg:text-7xl font-bold mb-6">
+                        <span class="block">Hello, I'm</span>
+                        <span class="gradient-text block" id="typed-name"></span>
+                    </h1>
+                    
+                    <p class="text-xl lg:text-2xl mb-8 text-gray-300 leading-relaxed">
+                        Electronics Engineer specializing in Digital IC Design, FPGA Prototyping, and Embedded Systems. 
+                        I create efficient and reliable hardware systems from RTL design to physical implementation.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="scrollToSection('projects')" class="btn-primary px-8 py-4 rounded-full text-white font-semibold text-lg">
+                            View My Work
+                        </button>
+                        <button onclick="scrollToSection('contact')" class="border-2 border-white px-8 py-4 rounded-full text-white font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300">
+                            Get In Touch
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <img src="resources/profile.png" alt="Abdelhameed Mahmoud" class="w-80 h-80 rounded-full border-4 border-orange-500 shadow-2xl">
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            RTL→GDSII
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-reveal">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4">My Expertise</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Providing comprehensive electronics and communication services with a focus on cutting-edge technology and reliable solutions.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg text-center section-reveal">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center">
+                        <img src="resources/service-digital-ic.png" alt="Digital IC Design" class="w-12 h-12">
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Digital IC Design</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Specialized in RTL-to-GDSII flow, creating efficient and reliable integrated circuits from design to physical implementation. 
+                        Expert in synthesis, place & route, and timing closure.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg text-center section-reveal">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center">
+                        <img src="resources/service-fpga.png" alt="FPGA Prototyping" class="w-12 h-12">
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">FPGA Prototyping</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Experienced in FPGA prototyping for hardware acceleration and system validation. 
+                        Skilled in Xilinx, Intel (Altera), and Microsemi platforms with advanced verification techniques.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg text-center section-reveal">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center">
+                        <img src="resources/service-embedded.png" alt="Embedded Systems" class="w-12 h-12">
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-900">Embedded Systems</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Skilled in developing and programming embedded systems for various applications. 
+                        From microcontrollers to complex hardware-software integration and real-time systems.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-reveal">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Explore my portfolio of cutting-edge hardware design projects, from RISC-V processors to IoT systems.
+                </p>
+            </div>
+            
+            <!-- Project Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 section-reveal">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="digital-ic">Digital IC</button>
+                <button class="filter-btn" data-filter="fpga">FPGA</button>
+                <button class="filter-btn" data-filter="embedded">Embedded</button>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- RISC-V Project -->
+                <div class="project-card card-hover section-reveal" data-category="digital-ic fpga">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="text-4xl mb-2">🔧</div>
+                            <div class="font-mono text-sm">RISC-V Core</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold mb-2">RISC-V CPU Design</h3>
+                        <p class="text-gray-600 mb-4">Complete 32-bit RISC-V processor implementation with pipeline, hazard detection, and memory management.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-mono">Verilog</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-mono">FPGA</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-mono">RISC-V</span>
+                        </div>
+                        <button onclick="openProjectModal('riscv')" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- IoT Project -->
+                <div class="project-card card-hover section-reveal" data-category="embedded fpga">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="text-4xl mb-2">📡</div>
+                            <div class="font-mono text-sm">IoT Network</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold mb-2">IoT Sensor Network</h3>
+                        <p class="text-gray-600 mb-4">Wireless sensor network with real-time data acquisition, processing, and cloud connectivity.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-mono">Embedded C</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-mono">LoRa</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-mono">Sensors</span>
+                        </div>
+                        <button onclick="openProjectModal('iot')" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- SDR Project -->
+                <div class="project-card card-hover section-reveal" data-category="digital-ic fpga">
+                    <div class="h-48 bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="text-4xl mb-2">📻</div>
+                            <div class="font-mono text-sm">SDR Platform</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold mb-2">SDR Platform</h3>
+                        <p class="text-gray-600 mb-4">Software-defined radio platform for wireless communication protocols and signal processing.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-mono">Verilog</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-mono">DSP</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-mono">RF</span>
+                        </div>
+                        <button onclick="openProjectModal('sdr')" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- RTOS Project -->
+                <div class="project-card card-hover section-reveal" data-category="embedded">
+                    <div class="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="text-4xl mb-2">⚡</div>
+                            <div class="font-mono text-sm">Real-time OS</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold mb-2">Real-time OS</h3>
+                        <p class="text-gray-600 mb-4">Custom real-time operating system with task scheduling, memory management, and device drivers.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-mono">C</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-mono">ARM</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-mono">RTOS</span>
+                        </div>
+                        <button onclick="openProjectModal('rtos')" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- CRC Project -->
+                <div class="project-card card-hover section-reveal" data-category="digital-ic">
+                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="text-4xl mb-2">🔢</div>
+                            <div class="font-mono text-sm">CRC Engine</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold mb-2">CRC Accelerator</h3>
+                        <p class="text-gray-600 mb-4">Hardware-accelerated CRC calculation engine for high-speed data integrity checking.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-mono">Verilog</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-mono">Hardware</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-mono">High-speed</span>
+                        </div>
+                        <button onclick="openProjectModal('crc')" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- UART Project -->
+                <div class="project-card card-hover section-reveal" data-category="embedded digital-ic">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="text-4xl mb-2">🔌</div>
+                            <div class="font-mono text-sm">UART Ctrl</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold mb-2">UART Controller</h3>
+                        <p class="text-gray-600 mb-4">Universal Asynchronous Receiver-Transmitter with advanced features and protocol support.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-mono">Verilog</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-mono">Serial</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-mono">Communication</span>
+                        </div>
+                        <button onclick="openProjectModal('uart')" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-reveal">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Technical Skills</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive expertise across the hardware design spectrum, from RTL design to system integration.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Skills Chart -->
+                <div class="section-reveal">
+                    <div id="skills-chart" style="width: 100%; height: 400px;"></div>
+                </div>
+                
+                <!-- Skills List -->
+                <div class="space-y-8 section-reveal">
+                    <div>
+                        <h3 class="font-display text-2xl font-semibold mb-6 text-gray-900">Hardware Languages</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Verilog</span>
+                                    <span class="text-gray-600">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">SystemVerilog</span>
+                                    <span class="text-gray-600">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">VHDL</span>
+                                    <span class="text-gray-600">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-display text-2xl font-semibold mb-6 text-gray-900">Tools & Platforms</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Cadence Suite</span>
+                                    <span class="text-gray-600">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Xilinx Vivado</span>
+                                    <span class="text-gray-600">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">ModelSim</span>
+                                    <span class="text-gray-600">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-reveal">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Technical Blog</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Insights, tutorials, and deep-dives into electronics engineering and hardware design topics.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <article class="blog-card section-reveal">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-blue-600 font-bold text-lg">ASIC</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">ASIC Design Flow</h3>
+                            <p class="text-gray-600 text-sm">Complete guide to ASIC implementation</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Comprehensive overview of the ASIC design flow from specification to tape-out, including RTL design, 
+                        verification, synthesis, and physical implementation.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">15 min read</span>
+                        <a href="blog-asic.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card section-reveal">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-green-600 font-bold text-lg">RISC</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">RISC-V Architecture</h3>
+                            <p class="text-gray-600 text-sm">Open-source processor design</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Deep dive into RISC-V architecture, instruction set, and implementation strategies for custom 
+                        processor design and hardware acceleration.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">12 min read</span>
+                        <a href="blog-riscv.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card section-reveal">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-purple-600 font-bold text-lg">DFT</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">Design for Testability</h3>
+                            <p class="text-gray-600 text-sm">Testing strategies for complex designs</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Essential DFT techniques including scan chains, BIST, and JTAG for ensuring testability 
+                        and reliability in complex digital designs.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">10 min read</span>
+                        <a href="blog-DFT.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card section-reveal">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-red-600 font-bold text-lg">VLSI</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">VLSI Design</h3>
+                            <p class="text-gray-600 text-sm">Very Large Scale Integration techniques</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Advanced VLSI design methodologies, floorplanning strategies, and optimization techniques 
+                        for high-performance integrated circuits.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">18 min read</span>
+                        <a href="blog-vlsi.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card section-reveal">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-yellow-600 font-bold text-lg">MEM</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">Memory Technologies</h3>
+                            <p class="text-gray-600 text-sm">Modern memory device architectures</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Comprehensive overview of memory technologies including SRAM, DRAM, flash memory, 
+                        and emerging non-volatile memory technologies.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">14 min read</span>
+                        <a href="blog-Memory_Devices.html" class="text-orange-600 font-semibold hover:text-orange-700">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card section-reveal">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-indigo-600 font-bold text-lg">FPGA</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-gray-900">FPGA Optimization</h3>
+                            <p class="text-gray-600 text-sm">Performance tuning and resource optimization</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Advanced FPGA optimization techniques including pipelining, resource sharing, 
+                        and timing closure strategies for high-performance designs.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">11 min read</span>
+                        <span class="text-gray-400">Coming Soon</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-reveal">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Let's Connect</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Interested in collaborating on hardware design projects or have questions about my work? 
+                    I'd love to hear from you.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="section-reveal">
+                        <h3 class="font-display text-2xl font-semibold mb-6 text-gray-900">Get In Touch</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Email</p>
+                                    <p class="text-gray-600">abdelhameed.mahmoud@example.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">LinkedIn</p>
+                                    <p class="text-gray-600">linkedin.com/in/abdelhameed-mahmoud</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">GitHub</p>
+                                    <p class="text-gray-600">github.com/abdelhameed-mahmoud</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-reveal">
+                        <form class="space-y-6" id="contact-form">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                                <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full btn-primary px-8 py-4 rounded-lg text-white font-semibold text-lg">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-6">
+                    <img src="resources/profile.png" alt="Profile" class="w-12 h-12 rounded-full">
+                    <span class="font-display text-2xl font-semibold">Abdelhameed Mahmoud</span>
+                </div>
+                
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Electronics Engineer passionate about creating innovative hardware solutions and pushing the boundaries of digital design.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2024 Abdelhameed Mahmoud. All rights reserved. Built with modern web technologies and optimized for performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content m-4">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 id="modal-title" class="font-display text-3xl font-bold text-gray-900"></h2>
+                    <button onclick="closeProjectModal()" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="modal-content" class="prose max-w-none">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
